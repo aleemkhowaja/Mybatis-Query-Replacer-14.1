@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- we need to have this bean definition here in order to read values from property file  -->
+	<bean  parent="propertyPlaceholderConfigurer" />
+	
+	<!-- commented by Richie since they are not needed plus they resulted in an error when deploying on jboss EAP due to duplication
+	<bean id="cmsConductorServicesRegistryRmi" class="com.path.lib.remote.RegistryRmi">
+		<property name="port" value="${cms.conductor.rmi.registry.port}"></property>
+	</bean>
+	
+	<bean id="cmsServicesRegistryRmi" class="com.path.lib.remote.RegistryRmi">
+		<property name="port" value="${cms.rmi.registry.port}"></property>
+	</bean>
+	 -->
+	<bean id="pathServicesRegistryRmi" class="com.path.lib.remote.RegistryRmi">
+		<!--port in .properties file fro imal_services-->
+		<property name="port" value="${cms.conductor.rmi.registry.port}"></property>
+	</bean>
+	
+	<!-- commented by Richie since they are not needed plus they resulted in an error when deploying on jboss EAP due to duplication
+	<bean id="cmsConductorServicesExporter" class="com.path.lib.remote.PathBeanExporter">
+		<property name="pathRegistry" ref="cmsConductorServicesRegistryRmi"></property>
+		<property name="beanAvailability" value="${cms.conductor.beanAvailability}" />
+		<property name="remoteTechnicque" value="${cms.conductor.remoting.technique}" />
+	</bean>
+	
+	<bean id="cmsServicesExporter" class="com.path.lib.remote.PathBeanExporter">
+		<property name="pathRegistry" ref="cmsServicesRegistryRmi"></property>
+		<property name="beanAvailability" value="${cms.beanAvailability}" />
+		<property name="remoteTechnicque" value="${cms.remoting.technique}" />
+	</bean>
+	 -->
+	<bean id="pathBeanFactoryExporter" class="com.path.lib.remote.PathBeanExporter">
+		<property name="pathRegistry" ref="pathServicesRegistryRmi"></property>
+		<property name="beanAvailability" value="${cms.conductor.beanAvailability}" />
+		<property name="remoteTechnicque" value="${cms.conductor.remoting.technique}" />
+	</bean>
+	     
+	<!-- below we will include all screen or module related BO exporter files -->
+	<import resource="classpath:com/path/conf/**/BOExporter.xml"/>
+	 
+
+</beans>

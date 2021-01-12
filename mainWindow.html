@@ -1,0 +1,44 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script  type="text/javascript" >
+//alert( window.File && window.FileReader && window.FileList && window.Blob)
+</script>
+<title>LogTracer - V3</title></head>
+<form id="formatterFormId">
+<body  bgcolor="steelBlue">
+	<table>
+		<tr>
+			<td>
+				Choose a log file :
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="file" id="fileinput" size="70" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Choose a single query :<input type="checkbox" onclick="showHideTextArea(this)" />
+			</td>
+		</tr>
+		<tr id="queryTextAreaTR" style="display:none;">
+
+			<td>
+				<textarea id="queryTextArea" rows="4" cols="150"  ></textarea>
+				<br/>
+				<input type="button" value="switch Params" onclick="switchSingleQuery();" />
+			</td>
+		</tr>
+	</table>
+
+	<div id="theDiv"></div>
+
+</body>
+</form>
+</html>
+
+
+<script type="text/javascript" src="./newFormatter.js"></script>
